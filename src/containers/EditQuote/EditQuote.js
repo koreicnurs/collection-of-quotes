@@ -7,20 +7,19 @@ import Spinner from "../../UI/Spinner/Spinner";
 import NavBar from "../../components/NavBar/NavBar";
 
 const EditQuote = ({match}) => {
-
     const history = useHistory();
     const [loading, setLoading] = useState(false);
     const [quote, setQuote] = useState( {
-        category: '',
-        author: '',
-        quoteText: '',
+        category: "",
+        author: "",
+        quoteText: "",
     });
 
     useEffect(() => {
         setLoading(true);
         const getDataPost = async () => {
             const response = await axiosApi(`/quotes/${match.params.id}.json`);
-            setQuote(response.data.quote);
+            setQuote(response.data);
         };
 
         getDataPost().catch();
@@ -41,7 +40,7 @@ const EditQuote = ({match}) => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axiosApi.put(`/quotes/${match.params.id}.json`, {'quote': quote});
+            await axiosApi.put(`/quotes/${match.params.id}.json`, quote);
         } catch (e) {
 
         } finally {

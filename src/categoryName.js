@@ -4,4 +4,4 @@ export const categoryName = [
     {title: 'Famous people', id: 'famous-people'},
     {title: 'Humour', id: 'humour'},
     {title: 'Motivation', id: 'Motivation'},
-]
+];

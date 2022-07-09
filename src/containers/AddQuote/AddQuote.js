@@ -7,9 +7,9 @@ import axiosApi from "../../axiosApi";
 
 const AddQuote = () => {
     const [quote, setQuote] = useState( {
-        category: '',
-        author: '',
-        quoteText: '',
+        category: "",
+        author: "",
+        quoteText: "",
     });
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -27,9 +27,7 @@ const AddQuote = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axiosApi.post('/quotes.json', {
-                quote,
-            });
+            await axiosApi.post('/quotes.json', quote);
         } finally {
             setLoading(false);
             history.push('/');

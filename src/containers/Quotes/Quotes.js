@@ -9,7 +9,7 @@ const Quotes = () => {
     const [quotes, setQuotes] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const getPosts = async () => {
+    const getQuotes = async () => {
         setLoading(true);
         try {
             const response = await axiosApi(`/quotes.json`);
@@ -18,9 +18,9 @@ const Quotes = () => {
                 for (let key of Object.entries(response.data)) {
                     quotesArray.push({
                         id: key[0],
-                        category: key[1].quote.category,
-                        author: key[1].quote.author,
-                        quoteText: key[1].quote.quoteText
+                        category: key[1].category,
+                        author: key[1].author,
+                        quoteText: key[1].quoteText
                     });
                 }
             }
@@ -37,14 +37,14 @@ const Quotes = () => {
         try {
             const q = quotes.filter(k => k.id === id)
             await axiosApi.delete(`/quotes/${q[0].id}.json`);
-            getPosts().catch();
+            getQuotes().catch();
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        getPosts().catch();
+        getQuotes().catch();
     }, []);
 
     return loading ? (<Spinner/>)
