@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import NavBar from "../../components/NavBar/NavBar";
-import axios from "axios";
-import {NavLink} from "react-router-dom";
 import Spinner from "../../UI/Spinner/Spinner";
 import Button from "../../UI/Button/Button";
+import axiosApi from "../../axiosApi";
 
 const Quotes = () => {
     const [quotes, setQuotes] = useState(null);
@@ -12,7 +11,7 @@ const Quotes = () => {
     const getPosts = async () => {
         setLoading(true);
         try {
-            const response = await axios(`https://bn-task-63-default-rtdb.europe-west1.firebasedatabase.app/quotes.json`);
+            const response = await axiosApi(`/quotes.json`);
             const quotesArray = [];
             if (response.data) {
                 for (let key of Object.entries(response.data)) {
@@ -32,6 +31,16 @@ const Quotes = () => {
         }
     };
 
+    const deleteQuote = async (id) => {
+        setLoading(true);
+        try {
+            const q = quotes.filter(k => k.id === id)
+            await axiosApi.delete(`/quotes/${q[0].id}.json`);
+            getPosts().catch();
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         getPosts().catch();
@@ -43,20 +52,20 @@ const Quotes = () => {
             <>
                 <NavBar/>
 
-                <div className='posts'>
+                <div className='quotes'>
                     {quotes.map(q => {
                         return (
-                            <div className="card" key={q.author}>
+                            <div className="card" key={q.id}>
                                 <div className="card-body">
                                     <p className="card-text">{q.quoteText}</p>
-                                    <h6 className='card-title'>- {q.author}</h6>
+                                    <h6 className='card-title'>{q.author}</h6>
                                     <Button
-                                        classType='warning'
+                                        classType='danger'
                                         type='button'
-                                        // clicked={}
-                                        name='Edit'
+                                        name='Delete'
+                                        clicked={e => deleteQuote(q.id)}
                                     />
-                                    <NavLink className="btn btn-danger" to={`posts/${q.id}`}>X</NavLink>
+                                    {/*<NavLink className="btn btn-danger" to={`quotes/${q.id}`}>X</NavLink>*/}
                                 </div>
                             </div>
                         )
