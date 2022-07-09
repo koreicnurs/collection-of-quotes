@@ -4,7 +4,7 @@ import Navigation from "../Navigation/Navigation";
 
 const MainPage = () => {
     return (
-        <div>
+        <div className='main'>
             <Navigation/>
             <Quotes/>
         </div>

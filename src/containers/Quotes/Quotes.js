@@ -60,7 +60,7 @@ const Quotes = () => {
                                 <div className="card-body">
                                     <p className="card-text">{q.quoteText}</p>
                                     <h6 className='card-title'>{q.author}</h6>
-                                    <NavLink className="btn btn-warning" to={`quotes/${q.id}`}>Edit</NavLink>
+                                    <NavLink className="btn btn-warning" to={`quotes/${q.id}/edit`}>Edit</NavLink>
                                     <Button
                                         classType='danger'
                                         type='button'
