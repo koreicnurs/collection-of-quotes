@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Quotes from "./containers/Quotes/Quotes";
 import AddQuote from "./containers/AddQuote/AddQuote";
 import EditQuote from "./containers/EditQuote/EditQuote";
 import MainPage from "./containers/MainPage/MainPage";
 import Category from "./containers/Category/Category";
+import './App.css';
 
 const App = () => {
     return (

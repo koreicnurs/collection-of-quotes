@@ -1,19 +1,24 @@
 import React from 'react';
-import NavLink from "react-router-dom/es/NavLink";
+import {NavLink} from "react-router-dom";
 import {categoryName} from "../../categoryName";
+import './Navigation.css';
 
 const Navigation = () => {
 
     return (
         <>
-            <nav>
-                <NavLink to='/'>All</NavLink>
+            <ul className='nav navigation justify-content-center'>
+                <li className="nav-item">
+                    <NavLink className='nav-link link' to='/'>All</NavLink>
+                </li>
                 {categoryName.map(c => {
                     return (
-                        <NavLink key={c.id} to={`/quotes/${c.id}"`}>{c.title}</NavLink>
+                        <li className="nav-item" key={c.id}>
+                            <NavLink className='nav-link link' key={c.id} to={`/quotes/${c.id}"`}>{c.title}</NavLink>
+                        </li>
                     )
                 })}
-            </nav>
+            </ul>
 
         </>
     );

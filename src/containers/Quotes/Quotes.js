@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import NavBar from "../../components/NavBar/NavBar";
 import Spinner from "../../UI/Spinner/Spinner";
 import Button from "../../UI/Button/Button";
 import axiosApi from "../../axiosApi";
 import {NavLink} from "react-router-dom";
+import './Quotes.css';
 
 const Quotes = () => {
     const [quotes, setQuotes] = useState(null);
@@ -51,22 +51,24 @@ const Quotes = () => {
         :
         quotes && (
             <>
-                <NavBar/>
-
                 <div className='quotes'>
                     {quotes.map(q => {
                         return (
                             <div className="card" key={q.id}>
                                 <div className="card-body">
-                                    <p className="card-text">{q.quoteText}</p>
-                                    <h6 className='card-title'>{q.author}</h6>
-                                    <NavLink className="btn btn-warning" to={`quotes/${q.id}/edit`}>Edit</NavLink>
-                                    <Button
-                                        classType='danger'
-                                        type='button'
-                                        name='X'
-                                        clicked={e => deleteQuote(q.id)}
-                                    />
+                                    <div className='card-body-left'>
+                                        <p className="card-text">{q.quoteText}</p>
+                                        <h5 className='card-title'>Quote by: {q.author}</h5>
+                                    </div>
+                                    <div className='right'>
+                                        <NavLink className="btn btn-warning" to={`quotes/${q.id}/edit`}>Edit</NavLink>
+                                        <Button
+                                            classType='danger'
+                                            type='button'
+                                            name='X'
+                                            clicked={e => deleteQuote(q.id)}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         )

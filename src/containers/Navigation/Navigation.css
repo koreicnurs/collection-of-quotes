@@ -1,0 +1,23 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background: blanchedalmond;
+    padding: 30px;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+.navigation a {
+    display: block;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.navigation li {
+    border-bottom: 1px solid lightseagreen;
+}
+
+.navigation li:last-child {
+    border-bottom: none;
+}

@@ -1,13 +1,18 @@
 import React from 'react';
 import Quotes from "../Quotes/Quotes";
 import Navigation from "../Navigation/Navigation";
+import NavBar from "../../components/NavBar/NavBar";
+import './Main.css';
 
 const MainPage = () => {
     return (
-        <div className='main'>
-            <Navigation/>
-            <Quotes/>
-        </div>
+        <>
+            <NavBar/>
+            <div className='main'>
+                <Navigation/>
+                <Quotes/>
+            </div>
+        </>
     );
 };
 

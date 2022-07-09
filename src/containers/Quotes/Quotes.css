@@ -1,0 +1,36 @@
+.quotes {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
+    margin: 0 50px;
+    font-size: 16px;
+}
+
+.card {
+    background: azure;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    padding: 20px 50px;
+}
+
+.card-body-left {
+    font-style: italic;
+    color: lightseagreen;
+}
+
+.card-title {
+    color: deepskyblue;
+}
+
+.btn {
+    display: inline-block;
+    margin: 0 20px;
+    color: white;
+}

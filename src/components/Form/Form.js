@@ -10,8 +10,8 @@ const Form = props => {
     const category = categoryName.map(c => {
         return (
             <option value={c.id} key={c.id}>{c.title}</option>
-        )
-    })
+        );
+    });
 
     return (
         <form className='form' onSubmit={props.formSubmit}>

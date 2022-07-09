@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useEffect} from "react";
 import axiosApi from "../../axiosApi";
 import Spinner from "../../UI/Spinner/Spinner";
-import {NavLink} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
 import Button from "../../UI/Button/Button";
 import NavBar from "../../components/NavBar/NavBar";
 import Navigation from "../Navigation/Navigation";
@@ -12,6 +12,7 @@ const Category = ({match}) => {
 
     const [category, setCategory] = useState(null);
     const [loading, setLoading] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
         setLoading(true);
@@ -36,14 +37,15 @@ const Category = ({match}) => {
 
     }, [match.params.category]);
 
+
     const deleteQuote = async (id) => {
         setLoading(true);
         try {
-            const q = category.filter(k => k.id === id)
+            const q = category.filter(k => k.id === id);
             await axiosApi.delete(`/quotes/${q[0].id}.json`);
-            // getQuotes().catch();
         } finally {
             setLoading(false);
+            history.push('/');
         }
     };
 
@@ -51,25 +53,32 @@ const Category = ({match}) => {
         category && (
             <>
                 <NavBar/>
-                <Navigation/>
-
-                {category.map(q => {
-                    return (
-                        <div className="card" key={q.id}>
-                            <div className="card-body">
-                                <p className="card-text">{q.quoteText}</p>
-                                <h6 className='card-title'>{q.author}</h6>
-                                <NavLink className="btn btn-warning" to={`quotes/${q.id}/edit`}>Edit</NavLink>
-                                <Button
-                                    classType='danger'
-                                    type='button'
-                                    name='X'
-                                    clicked={e => deleteQuote(q.id)}
-                                />
-                            </div>
-                        </div>
-                    )
-                })}
+                <div className='main'>
+                    <Navigation/>
+                    <div className='quotes'>
+                        {category.map(q => {
+                            return (
+                                <div className="card" key={q.id}>
+                                    <div className="card-body">
+                                        <div className='card-body-left'>
+                                            <p className="card-text">{q.quoteText}</p>
+                                            <h5 className='card-title'>Quote by: {q.author}</h5>
+                                        </div>
+                                        <div className='right'>
+                                            <NavLink className="btn btn-warning" to={`quotes/${q.id}/edit`}>Edit</NavLink>
+                                            <Button
+                                                classType='danger'
+                                                type='button'
+                                                name='X'
+                                                clicked={e => deleteQuote(q.id)}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
             </>
 
         );
